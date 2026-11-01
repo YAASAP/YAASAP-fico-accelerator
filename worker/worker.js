@@ -41,7 +41,7 @@ async function envoyerMail(env, email, cle) {
 export default {
   async fetch(req, env) {
     const url = new URL(req.url);
-    const cors = { "access-control-allow-origin": env.SITE_URL, "access-control-allow-headers": "content-type" };
+    const cors = { "access-control-allow-origin": new URL(env.SITE_URL).origin, "access-control-allow-headers": "content-type" };
     if (req.method === "OPTIONS") return new Response(null, { headers: cors });
 
     if (url.pathname === "/webhook" && req.method === "POST") {
