@@ -1,0 +1,11 @@
+name = "fico-accelerator-api"
+main = "worker.js"
+compatibility_date = "2026-10-01"
+
+[vars]
+MAIL_FROM = "FICO Accelerator <acces@VOTRE-DOMAINE>"
+SITE_URL = "https://VOTRE-SITE"
+
+[[kv_namespaces]]
+binding = "LICENCES"
+id = "REMPLACER_PAR_ID_KV"

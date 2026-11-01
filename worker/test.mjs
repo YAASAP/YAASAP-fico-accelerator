@@ -1,0 +1,23 @@
+import w, { signatureStripeValide, creerCle } from "./worker.js";
+import { createHmac } from "node:crypto";
+import assert from "node:assert";
+const kv = new Map(), mails = [];
+const env = { STRIPE_WEBHOOK_SECRET: "whsec_test", LICENCE_SECRET: "s3", RESEND_API_KEY: "x", MAIL_FROM: "a@b", SITE_URL: "https://s",
+  LICENCES: { get: async (k) => kv.get(k) ?? null, put: async (k, v) => void kv.set(k, v) } };
+globalThis.fetch = async (u, o) => { mails.push(JSON.parse(o.body)); return { ok: true, status: 200 }; };
+const post = async (type, obj) => { const body = JSON.stringify({ type, data: { object: obj } }); const t = Math.floor(Date.now() / 1000);
+  const v1 = createHmac("sha256", "whsec_test").update(`${t}.${body}`).digest("hex");
+  return w.fetch(new Request("https://x/webhook", { method: "POST", body, headers: { "stripe-signature": `t=${t},v1=${v1}` } }), env); };
+const verify = async (email, key) => (await (await w.fetch(new Request("https://x/verify", { method: "POST", body: JSON.stringify({ email, key }) }), env)).json()).valid;
+assert.equal((await w.fetch(new Request("https://x/webhook", { method: "POST", body: "{}", headers: { "stripe-signature": "t=1,v1=00" } }), env)).status, 400);
+assert.equal(await signatureStripeValide("{}", "t=1,v1=00", "k"), false);
+const s = { payment_status: "paid", customer: "cus_1", customer_details: { email: "Client@Ex.com" } };
+assert.equal((await post("checkout.session.completed", s)).status, 200);
+assert.equal(mails.length, 1); const cle = mails[0].text.match(/FA-[A-Z0-9-]+/)[0];
+assert.equal(await verify("client@ex.com", cle), true);
+assert.equal(await verify("client@ex.com", "FA-FAUX"), false);
+assert.equal(await verify("autre@ex.com", cle), false);
+await post("checkout.session.completed", s); assert.equal(mails.length, 1, "pas de second mail");
+await post("customer.subscription.deleted", { customer: "cus_1" });
+assert.equal(await verify("client@ex.com", cle), false, "révoquée après résiliation");
+console.log("worker OK");

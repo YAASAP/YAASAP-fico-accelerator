@@ -1,0 +1,33 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>FICO Accelerator — spécifications SAP FI/CO</title>
+<meta name="description" content="Rédigez vos spécifications SAP FI/CO (SF, ST, SP) en quelques minutes : gabarits, contrôle qualité, brouillon assisté par IA."><link rel="stylesheet" href="style.css"></head><body>
+<header><div class="w"><b>FICO Accelerator</b><a href="acces.html">Mon accès</a></div></header>
+<main class="w">
+<h1>Vos spécifications SAP FI/CO, prêtes en minutes</h1>
+<p class="lead">Spécifications fonctionnelles, techniques et de paramétrage : gabarits propres, contrôle des sections manquantes, export Word, brouillon rédigé par IA à partir de vos notes.</p>
+<p><a id="cta" class="btn" href="#tarif">Commencer — 79 €/mois</a></p>
+<div class="grid">
+<div class="card"><h3>3 types de documents</h3>SF, ST et SP avec sections guidées et aide intégrée.</div>
+<div class="card"><h3>Contrôle qualité</h3>Sections obligatoires, colonnes des tableaux, rappel de ce qui reste « À compléter ».</div>
+<div class="card"><h3>Brouillon par IA</h3>Vos notes deviennent un document structuré. Rien n'est inventé : les manques deviennent des points ouverts.</div>
+</div>
+<h2 id="tarif">Tarif</h2>
+<div class="grid">
+<div class="card"><h3>Solo</h3><div class="price">79 € <small>/mois TTC</small></div>
+<ul><li>SF, ST, SP illimités</li><li>Export Word</li><li>Brouillon IA</li><li>Résiliable à tout moment</li></ul>
+<a id="buy" class="btn" href="#" aria-disabled="true">Souscrire</a><p id="buynote" class="lead" style="font-size:.9rem"></p></div>
+<div class="card"><h3>Équipe</h3><div class="price">Sur devis</div>
+<ul><li>Plusieurs utilisateurs</li><li>Gabarits à votre charte</li><li>Facturation entreprise</li></ul>
+<a class="btn" id="mail" href="#">Nous écrire</a></div>
+</div>
+<h2>Après le paiement</h2>
+<p>Vous recevez par e-mail une clé d'accès personnelle. Saisissez-la avec votre adresse e-mail sur la page <a href="acces.html">Mon accès</a>.</p>
+</main>
+<footer><div class="w">FICO Accelerator est un outil indépendant, non affilié à SAP SE. Gabarits génériques : aucun document client n'est utilisé. Éditeur : YAASAP.</div></footer>
+<script src="config.js"></script>
+<script>
+var c=window.FICO_CONFIG,b=document.getElementById('buy');
+document.getElementById('mail').href='mailto:'+c.contact+'?subject=FICO%20Accelerator%20-%20offre%20%C3%89quipe';
+if(c.stripeLinkSolo){b.href=c.stripeLinkSolo;b.removeAttribute('aria-disabled');document.getElementById('cta').href=c.stripeLinkSolo}
+else document.getElementById('buynote').textContent='Ouverture des souscriptions imminente.';
+</script></body></html>

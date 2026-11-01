@@ -1,0 +1,30 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Mon accès — FICO Accelerator</title><link rel="stylesheet" href="style.css"></head><body>
+<header><div class="w"><b>FICO Accelerator</b><a href="index.html">Accueil</a></div></header>
+<main class="w" style="max-width:520px">
+<h1 style="font-size:1.8rem">Mon accès</h1>
+<p id="paid" class="ok" hidden>Paiement reçu. Votre clé d'accès arrive par e-mail dans quelques minutes (pensez aux courriers indésirables).</p>
+<form id="f"><label>Adresse e-mail utilisée pour le paiement<input id="e" type="email" required autocomplete="email"></label>
+<label>Clé d'accès reçue par e-mail<input id="k" required autocomplete="off" placeholder="FA-…"></label>
+<button class="btn" type="submit">Vérifier</button></form>
+<p id="m" role="status"></p>
+<div id="ok" hidden class="card"><h3>Accès actif</h3>
+<p>Installez l'outil et utilisez votre clé :</p>
+<pre id="cmd" style="white-space:pre-wrap;word-break:break-all"></pre>
+<p>Dépôt et documentation : voir l'e-mail de bienvenue.</p></div>
+</main><script src="config.js"></script>
+<script>
+var $=function(i){return document.getElementById(i)},c=window.FICO_CONFIG;
+if(/[?&]paid=1/.test(location.search))$('paid').hidden=false;
+try{$('e').value=localStorage.getItem('fa_e')||'';$('k').value=localStorage.getItem('fa_k')||''}catch(x){}
+$('f').onsubmit=function(ev){ev.preventDefault();var m=$('m');m.className='';
+ if(!c.apiUrl){m.className='ko';m.textContent='Service d\'accès pas encore activé.';return}
+ m.textContent='Vérification…';
+ fetch(c.apiUrl+'/verify',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({email:$('e').value.trim(),key:$('k').value.trim()})})
+ .then(function(r){return r.json()}).then(function(d){
+  if(d.valid){m.className='ok';m.textContent='Accès valide ('+d.plan+').';$('ok').hidden=false;
+   $('cmd').textContent='export FICO_LICENCE_EMAIL='+$('e').value.trim()+'\nexport FICO_LICENCE_KEY='+$('k').value.trim();
+   try{localStorage.setItem('fa_e',$('e').value.trim());localStorage.setItem('fa_k',$('k').value.trim())}catch(x){}}
+  else{m.className='ko';m.textContent='Clé ou e-mail invalide, ou abonnement terminé.'}})
+ .catch(function(){m.className='ko';m.textContent='Service injoignable, réessayez.'})};
+</script></body></html>

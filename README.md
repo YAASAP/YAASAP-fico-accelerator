@@ -34,6 +34,10 @@ Le modèle IA se règle avec la variable `SPECS_STUDIO_MODELE`.
 - Le brouillon IA ne doit rien inventer : les informations manquantes restent « À compléter ».
 - Pour un usage commercial : hébergement UE, pas d'entraînement sur les données clients, à préciser dans les CGU.
 
+## Site et accès payant
+
+`site/` : page de vente et page « Mon accès ». `worker/` : webhook Stripe, envoi de la clé par e-mail, vérification. Mise en ligne : `worker/README.md`.
+
 ## Tests
 
 ```
