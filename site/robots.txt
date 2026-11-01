@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+Disallow: /YAASAP-fico-accelerator/acces.html
+Sitemap: https://yaasap.github.io/YAASAP-fico-accelerator/sitemap.xml
