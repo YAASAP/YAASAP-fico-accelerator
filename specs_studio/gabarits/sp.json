@@ -1,0 +1,14 @@
+{
+  "id": "sp",
+  "titre": "Spécification de paramétrage",
+  "metadonnees": ["Projet", "Référence", "Version", "Auteur", "Date", "Statut", "Spécification fonctionnelle liée"],
+  "sections": [
+    {"id": "objectif", "titre": "Objectif du document", "type": "texte", "obligatoire": true, "aide": "Le paramétrage décrit et son but."},
+    {"id": "prerequis", "titre": "Prérequis", "type": "liste", "aide": "Ce qui doit exister avant de paramétrer."},
+    {"id": "parametrage", "titre": "Paramétrage", "type": "tableau", "colonnes": ["Étape", "Chemin ou transaction", "Paramètre", "Valeur", "Commentaire"], "obligatoire": true, "aide": "Une ligne par réglage, dans l'ordre d'exécution."},
+    {"id": "reference", "titre": "Données de référence", "type": "tableau", "colonnes": ["Donnée", "Valeur", "Commentaire"], "aide": "Comptes, codes, types de document."},
+    {"id": "transport", "titre": "Transport", "type": "liste", "aide": "Ordres de transport et ordre de passage."},
+    {"id": "tests", "titre": "Tests de validation", "type": "tableau", "colonnes": ["Id", "Test", "Résultat attendu"], "obligatoire": true, "aide": "Comment vérifier que le paramétrage fonctionne."},
+    {"id": "retour_arriere", "titre": "Retour arrière", "type": "liste", "aide": "Comment annuler le paramétrage."}
+  ]
+}

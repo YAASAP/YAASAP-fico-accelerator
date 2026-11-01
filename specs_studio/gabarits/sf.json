@@ -1,0 +1,18 @@
+{
+  "id": "sf",
+  "titre": "Spécification fonctionnelle",
+  "metadonnees": ["Projet", "Référence", "Version", "Auteur", "Date", "Statut"],
+  "sections": [
+    {"id": "objectif", "titre": "Objectif du document", "type": "texte", "obligatoire": true, "aide": "Le besoin en deux ou trois phrases."},
+    {"id": "contexte", "titre": "Contexte et enjeux", "type": "texte", "obligatoire": true, "aide": "Pourquoi ce besoin, quelle échéance ou contrainte."},
+    {"id": "perimetre", "titre": "Périmètre", "type": "liste", "obligatoire": true, "aide": "Ce qui est dans le périmètre, puis ce qui est exclu."},
+    {"id": "acteurs", "titre": "Acteurs et rôles", "type": "tableau", "colonnes": ["Acteur", "Rôle", "Responsabilité"], "aide": "Qui agit, qui valide."},
+    {"id": "description", "titre": "Description fonctionnelle", "type": "texte", "obligatoire": true, "aide": "Le fonctionnement attendu, étape par étape."},
+    {"id": "regles", "titre": "Règles de gestion", "type": "tableau", "colonnes": ["Id", "Règle", "Priorité"], "obligatoire": true, "aide": "Une règle vérifiable par ligne."},
+    {"id": "donnees", "titre": "Données et reporting", "type": "tableau", "colonnes": ["Donnée", "Source", "Commentaire"], "aide": "Champs, tables ou états concernés."},
+    {"id": "interfaces", "titre": "Interfaces et impacts", "type": "tableau", "colonnes": ["Élément", "Impact", "Commentaire"], "aide": "Autres modules, flux, états."},
+    {"id": "hypotheses", "titre": "Hypothèses et contraintes", "type": "liste", "aide": "Ce qui est supposé vrai, ce qui limite la solution."},
+    {"id": "tests", "titre": "Scénarios de test", "type": "tableau", "colonnes": ["Id", "Scénario", "Résultat attendu"], "obligatoire": true, "aide": "Cas nominal, cas limites, cas d'erreur."},
+    {"id": "points_ouverts", "titre": "Points ouverts", "type": "tableau", "colonnes": ["Id", "Question", "Responsable", "Échéance"], "aide": "Ce qui reste à trancher."}
+  ]
+}

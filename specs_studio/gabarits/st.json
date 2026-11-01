@@ -1,0 +1,18 @@
+{
+  "id": "st",
+  "titre": "Spécification technique",
+  "metadonnees": ["Projet", "Référence", "Version", "Auteur", "Date", "Statut", "Spécification fonctionnelle liée"],
+  "sections": [
+    {"id": "objectif", "titre": "Objectif du document", "type": "texte", "obligatoire": true, "aide": "Ce que cette spécification technique réalise."},
+    {"id": "rappel", "titre": "Rappel du besoin", "type": "texte", "obligatoire": true, "aide": "Résumé de la spécification fonctionnelle liée."},
+    {"id": "objets", "titre": "Objets techniques", "type": "tableau", "colonnes": ["Objet", "Type", "Description"], "obligatoire": true, "aide": "Programmes, classes, enhancements, services, jobs."},
+    {"id": "conception", "titre": "Conception détaillée", "type": "texte", "obligatoire": true, "aide": "Logique de traitement, enchaînement, algorithmes."},
+    {"id": "donnees", "titre": "Modèle de données", "type": "tableau", "colonnes": ["Table ou structure", "Champ", "Type", "Description"], "aide": "Tables et structures lues ou modifiées."},
+    {"id": "interfaces", "titre": "Interfaces et formats", "type": "tableau", "colonnes": ["Interface", "Sens", "Format", "Fréquence"], "aide": "IDoc, OData, fichiers, API."},
+    {"id": "erreurs", "titre": "Gestion des erreurs et journalisation", "type": "liste", "aide": "Messages, logs, reprise."},
+    {"id": "securite", "titre": "Sécurité et autorisations", "type": "liste", "aide": "Objets d'autorisation, rôles concernés."},
+    {"id": "performance", "titre": "Volumétrie et performance", "type": "liste", "aide": "Volumes attendus, contraintes de temps."},
+    {"id": "tests", "titre": "Tests unitaires", "type": "tableau", "colonnes": ["Id", "Cas de test", "Résultat attendu"], "obligatoire": true, "aide": "Tests à jouer avant recette."},
+    {"id": "deploiement", "titre": "Déploiement", "type": "liste", "aide": "Ordre des transports, prérequis, retour arrière."}
+  ]
+}

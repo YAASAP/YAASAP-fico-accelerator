@@ -1,0 +1,23 @@
+[project]
+name = "specs-studio"
+version = "0.1.0"
+description = "Spécifications SAP FI/CO (SF, ST, SP) à partir de gabarits génériques, avec brouillon assisté par IA"
+requires-python = ">=3.10"
+dependencies = ["python-docx>=1.1"]
+
+[project.optional-dependencies]
+ia = ["anthropic>=0.40"]
+test = ["pytest>=8"]
+
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools]
+packages = ["specs_studio"]
+
+[tool.setuptools.package-data]
+specs_studio = ["gabarits/*.json"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

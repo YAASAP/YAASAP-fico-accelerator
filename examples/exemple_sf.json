@@ -1,0 +1,50 @@
+{
+  "type": "sf",
+  "metadonnees": {
+    "Titre": "Exemple fictif — Contrôle des factures fournisseurs avant comptabilisation",
+    "Projet": "Exemple de démonstration (aucune donnée client)",
+    "Référence": "DEMO-SF-001",
+    "Version": "0.1",
+    "Auteur": "À renseigner",
+    "Date": "2026-11-01",
+    "Statut": "Brouillon"
+  },
+  "sections": {
+    "objectif": "Mettre en place un contrôle automatique des factures fournisseurs avant leur comptabilisation, afin de réduire les rejets en fin de mois.",
+    "contexte": "Les équipes comptables corrigent à la main des factures incomplètes, ce qui retarde la clôture. Le besoin est de détecter les anomalies à la saisie plutôt qu'à la validation.",
+    "perimetre": [
+      "Dans le périmètre : factures fournisseurs saisies dans une société pilote.",
+      "Hors périmètre : factures intercompagnies et notes de crédit.",
+      "Hors périmètre : reprise des factures historiques."
+    ],
+    "acteurs": [
+      ["Comptable fournisseurs", "Saisit et corrige les factures", "Traite les anomalies sous 48 heures"],
+      ["Responsable comptable", "Valide les règles", "Arbitre les exceptions"]
+    ],
+    "description": "À la saisie d'une facture, le système vérifie la présence des champs obligatoires, la cohérence du montant avec la commande et la validité du fournisseur. Une facture en anomalie est bloquée pour paiement et signalée dans une liste de travail.\n\nLa comptable corrige la facture ou la renvoie au fournisseur. Une facture corrigée est débloquée automatiquement.",
+    "regles": [
+      ["R1", "Une facture sans référence de commande est bloquée pour paiement.", "Haute"],
+      ["R2", "Un écart de plus de 2 % entre la facture et la commande déclenche une anomalie.", "Haute"],
+      ["R3", "Un fournisseur bloqué ne peut pas recevoir de facture.", "Moyenne"]
+    ],
+    "donnees": [
+      ["Référence de commande", "Facture fournisseur", "Champ obligatoire"],
+      ["Montant commandé", "Commande d'achat", "Base de comparaison de la règle R2"]
+    ],
+    "interfaces": [
+      ["Achats", "Lecture de la commande d'achat", "Aucune modification côté achats"]
+    ],
+    "hypotheses": [
+      "Toutes les factures de la société pilote référencent une commande.",
+      "Le seuil de 2 % est validé par le responsable comptable."
+    ],
+    "tests": [
+      ["T1", "Facture avec commande et écart de 1 %", "Facture acceptée"],
+      ["T2", "Facture sans référence de commande", "Facture bloquée, ligne dans la liste de travail"],
+      ["T3", "Facture avec écart de 3 %", "Anomalie signalée"]
+    ],
+    "points_ouverts": [
+      ["P1", "Le seuil de 2 % varie-t-il selon la famille d'achats ?", "Responsable comptable", "À définir"]
+    ]
+  }
+}
