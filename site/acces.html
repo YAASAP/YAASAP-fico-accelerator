@@ -1,18 +1,23 @@
 <!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Mon accès — FICO Accelerator</title><link rel="stylesheet" href="style.css"></head><body>
-<header><div class="w"><b>FICO Accelerator</b><a href="index.html">Accueil</a></div></header>
-<main class="w" style="max-width:520px">
-<h1 style="font-size:1.8rem">Mon accès</h1>
-<p id="paid" class="ok" hidden>Paiement reçu. Votre clé d'accès arrive par e-mail dans quelques minutes (pensez aux courriers indésirables).</p>
-<form id="f"><label>Adresse e-mail utilisée pour le paiement<input id="e" type="email" required autocomplete="email"></label>
-<label>Clé d'accès reçue par e-mail<input id="k" required autocomplete="off" placeholder="FA-…"></label>
+<title>Mon accès — FICO Accelerator</title>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Source+Sans+3:wght@300;400;600;700&family=Source+Code+Pro:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css"></head><body>
+<header class="masthead"><a class="pub-name" href="index.html">FICO <em>Accelerator</em></a><nav><a class="keep" href="index.html">Accueil</a></nav></header>
+<main class="wrap" style="padding-top:36px">
+<div class="sec-rule" style="margin-top:0"><span class="sec-rule-txt">Espace abonné</span></div>
+<h1 class="lead-hl">Mon accès</h1>
+<p class="lead-deck">Saisissez l’adresse e-mail du paiement et la clé reçue par e-mail.</p>
+<p id="paid" class="ok" hidden>Paiement reçu. Votre clé d’accès arrive par e-mail dans quelques minutes (pensez aux courriers indésirables).</p>
+<form id="f"><label for="e">Adresse e-mail utilisée pour le paiement</label><input id="e" type="email" required autocomplete="email">
+<label for="k">Clé d’accès reçue par e-mail</label><input id="k" required autocomplete="off" placeholder="FA-…">
 <button class="btn" type="submit">Vérifier</button></form>
 <p id="m" role="status"></p>
-<div id="ok" hidden class="card"><h3>Accès actif</h3>
-<p>Installez l'outil et utilisez votre clé :</p>
-<pre id="cmd" style="white-space:pre-wrap;word-break:break-all"></pre>
-<p>Dépôt et documentation : voir l'e-mail de bienvenue.</p></div>
-</main><script src="config.js"></script>
+<div id="ok" hidden class="card" style="margin-top:14px"><h3>Accès actif</h3>
+<p>Installez l’outil et utilisez votre clé :</p>
+<pre id="cmd" style="white-space:pre-wrap;word-break:break-all;font-family:var(--mono);font-size:13px"></pre></div>
+</main>
+<footer><div class="in"><span>© YAASAP · FICO Accelerator</span><span><a href="index.html">Accueil</a></span></div></footer>
+<script src="config.js"></script>
 <script>
 var $=function(i){return document.getElementById(i)},c=window.FICO_CONFIG;
 if(/[?&]paid=1/.test(location.search))$('paid').hidden=false;
