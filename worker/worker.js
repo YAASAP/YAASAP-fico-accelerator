@@ -1,5 +1,5 @@
 // Cloudflare Worker : webhook Stripe -> clé d'accès envoyée par e-mail -> vérification.
-// Secrets : STRIPE_WEBHOOK_SECRET, LICENCE_SECRET, RESEND_API_KEY ; variables : MAIL_FROM, SITE_URL ; KV : LICENCES.
+// Secrets : STRIPE_WEBHOOK_SECRET, LICENCE_SECRET, BREVO_API_KEY ; variables : MAIL_FROM (expéditeur vérifié dans Brevo), SITE_URL ; KV : LICENCES.
 const enc = new TextEncoder();
 const hex = (b) => [...new Uint8Array(b)].map((x) => x.toString(16).padStart(2, "0")).join("");
 
@@ -27,12 +27,12 @@ const norm = (e) => String(e || "").trim().toLowerCase();
 const json = (o, s = 200, h = {}) => new Response(JSON.stringify(o), { status: s, headers: { "content-type": "application/json", ...h } });
 
 async function envoyerMail(env, email, cle) {
-  const r = await fetch("https://api.resend.com/emails", {
+  const r = await fetch("https://api.brevo.com/v3/smtp/email", {
     method: "POST",
-    headers: { authorization: `Bearer ${env.RESEND_API_KEY}`, "content-type": "application/json" },
+    headers: { "api-key": env.BREVO_API_KEY, "content-type": "application/json", accept: "application/json" },
     body: JSON.stringify({
-      from: env.MAIL_FROM, to: [email], subject: "Votre accès FICO Accelerator",
-      text: `Merci pour votre souscription.\n\nVotre clé d'accès : ${cle}\n\nActivez-la sur ${env.SITE_URL}/acces.html avec cette adresse e-mail (${email}).\n\nVous pouvez résilier à tout moment depuis le lien de votre reçu Stripe.`,
+      sender: { name: "FICO Accelerator", email: env.MAIL_FROM }, to: [{ email }], subject: "Votre accès FICO Accelerator",
+      textContent: `Merci pour votre souscription.\n\nVotre clé d'accès : ${cle}\n\nActivez-la sur ${env.SITE_URL}/acces.html avec cette adresse e-mail (${email}).\n\nVous pouvez résilier à tout moment depuis le lien de votre reçu Stripe.`,
     }),
   });
   if (!r.ok) throw new Error(`mail ${r.status}`);

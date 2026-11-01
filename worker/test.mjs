@@ -2,7 +2,7 @@ import w, { signatureStripeValide, creerCle } from "./worker.js";
 import { createHmac } from "node:crypto";
 import assert from "node:assert";
 const kv = new Map(), mails = [];
-const env = { STRIPE_WEBHOOK_SECRET: "whsec_test", LICENCE_SECRET: "s3", RESEND_API_KEY: "x", MAIL_FROM: "a@b", SITE_URL: "https://s",
+const env = { STRIPE_WEBHOOK_SECRET: "whsec_test", LICENCE_SECRET: "s3", BREVO_API_KEY: "x", MAIL_FROM: "a@b.fr", SITE_URL: "https://s",
   LICENCES: { get: async (k) => kv.get(k) ?? null, put: async (k, v) => void kv.set(k, v) } };
 globalThis.fetch = async (u, o) => { mails.push(JSON.parse(o.body)); return { ok: true, status: 200 }; };
 const post = async (type, obj) => { const body = JSON.stringify({ type, data: { object: obj } }); const t = Math.floor(Date.now() / 1000);
@@ -13,7 +13,8 @@ assert.equal((await w.fetch(new Request("https://x/webhook", { method: "POST", b
 assert.equal(await signatureStripeValide("{}", "t=1,v1=00", "k"), false);
 const s = { payment_status: "paid", customer: "cus_1", customer_details: { email: "Client@Ex.com" } };
 assert.equal((await post("checkout.session.completed", s)).status, 200);
-assert.equal(mails.length, 1); const cle = mails[0].text.match(/FA-[A-Z0-9-]+/)[0];
+assert.equal(mails[0].sender.email, "a@b.fr"); assert.equal(mails[0].to[0].email, "client@ex.com");
+assert.equal(mails.length, 1); const cle = mails[0].textContent.match(/FA-[A-Z0-9-]+/)[0];
 assert.equal(await verify("client@ex.com", cle), true);
 assert.equal(await verify("client@ex.com", "FA-FAUX"), false);
 assert.equal(await verify("autre@ex.com", cle), false);
